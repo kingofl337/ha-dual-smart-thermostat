@@ -72,6 +72,7 @@ class TestFeatureAvailabilityContracts:
                 SYSTEM_TYPE_HEATER_COOLER,
                 [
                     "configure_floor_heating",
+                    "configure_secondary_heater",
                     "configure_fan",
                     "configure_humidity",
                     "configure_openings",

@@ -186,14 +186,16 @@
           "configure_humidity": "Konfigurera luftfuktighetsstyrning",
           "configure_openings": "Konfigurera fönster-/dörrsensorer",
           "configure_presets": "Konfigurera temperaturförinställningar",
-          "configure_floor_heating": "Konfigurera golvvärmeskydd"
+          "configure_floor_heating": "Konfigurera golvvärmeskydd",
+          "configure_secondary_heater": "Konfigurera sekundär värmekälla (reserv)"
         },
         "data_description": {
           "configure_fan": "Aktivera konfiguration av fläktinställningar. Detta gör att du kan ställa in en separat fläktenhet som kan köras oberoende för luftcirkulation.",
           "configure_humidity": "Aktivera konfiguration av övervakning och styrning av luftfuktighet. Detta gör att du kan ställa in luftfuktighetssensorer och avfuktningsläge.",
           "configure_openings": "Aktivera konfiguration av fönster- och dörrsensorer så att termostaten kan pausa driften när öppningar upptäcks.",
           "configure_presets": "Aktivera konfiguration av temperaturförinställningar som Borta, Komfort och Eko för snabba lägesbyten.",
-          "configure_floor_heating": "Aktivera konfiguration av golvtemperaturskydd. När aktiverat kan du ange en golvsensor och max-/mingränser för att skydda ditt golv."
+          "configure_floor_heating": "Aktivera konfiguration av golvtemperaturskydd. När aktiverat kan du ange en golvsensor och max-/mingränser för att skydda ditt golv.",
+          "configure_secondary_heater": "Lägg till en andra värmekälla som hjälper till när den primära värmen inte når måltemperaturen i tid, till exempel värmepumpsdelen av en luftkonditionering som stöd för en kamin. Du väljer entiteten, tidsgränsen och om den primära värmen ska förbli på."
         }
       },
       "heater_cooler": {
@@ -791,14 +793,16 @@
           "configure_humidity": "Konfigurera luftfuktighetsstyrning",
           "configure_openings": "Konfigurera fönster-/dörrsensorer",
           "configure_presets": "Konfigurera temperaturförinställningar",
-          "configure_floor_heating": "Konfigurera golvvärmeskydd"
+          "configure_floor_heating": "Konfigurera golvvärmeskydd",
+          "configure_secondary_heater": "Konfigurera sekundär värmekälla (reserv)"
         },
         "data_description": {
           "configure_fan": "Aktivera konfiguration av fläktinställningar. Detta gör att du kan ställa in en separat fläktenhet som kan köras oberoende för luftcirkulation.",
           "configure_humidity": "Aktivera konfiguration av övervakning och styrning av luftfuktighet. Detta gör att du kan ställa in luftfuktighetssensorer och avfuktningsläge.",
           "configure_openings": "Aktivera konfiguration av fönster- och dörrsensorer så att termostaten kan pausa driften när öppningar upptäcks.",
           "configure_presets": "Aktivera konfiguration av temperaturförinställningar som Borta, Komfort och Eko för snabba lägesbyten.",
-          "configure_floor_heating": "Aktivera konfiguration av golvtemperaturskydd. När aktiverat kan du ange en golvsensor och max-/mingränser för att skydda ditt golv."
+          "configure_floor_heating": "Aktivera konfiguration av golvtemperaturskydd. När aktiverat kan du ange en golvsensor och max-/mingränser för att skydda ditt golv.",
+          "configure_secondary_heater": "Lägg till en andra värmekälla som hjälper till när den primära värmen inte når måltemperaturen i tid, till exempel värmepumpsdelen av en luftkonditionering som stöd för en kamin. Du väljer entiteten, tidsgränsen och om den primära värmen ska förbli på."
         }
       },
       "basic": {

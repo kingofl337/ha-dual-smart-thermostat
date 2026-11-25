@@ -113,6 +113,7 @@ class OptionsFlowHandler(ExcludeOwnEntity, OptionsFlowWithReload):
             "configure_fan",
             "configure_humidity",
             "configure_floor_heating",
+            "configure_secondary_heater",
             "system_type_changed",
         }
 

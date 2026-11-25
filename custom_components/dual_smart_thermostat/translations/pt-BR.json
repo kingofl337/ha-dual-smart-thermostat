@@ -186,14 +186,16 @@
           "configure_humidity": "Configurar controle de umidade",
           "configure_openings": "Configurar sensores de janela/porta",
           "configure_presets": "Configurar predefinições de temperatura",
-          "configure_floor_heating": "Configurar proteção de aquecimento de piso"
+          "configure_floor_heating": "Configurar proteção de aquecimento de piso",
+          "configure_secondary_heater": "Configurar aquecedor secundário (reserva)"
         },
         "data_description": {
           "configure_fan": "Ativa a configuração das definições do ventilador. Isso permite configurar uma entidade de ventilador separada que pode funcionar de forma independente para circulação de ar.",
           "configure_humidity": "Ativa a configuração de monitoramento e controle de umidade. Isso permite configurar sensores de umidade e a operação do modo secagem.",
           "configure_openings": "Ativa a configuração de sensores de janela e porta para que o termostato possa pausar a operação quando aberturas forem detectadas.",
           "configure_presets": "Ativa a configuração de predefinições de temperatura como Ausente, Conforto e Eco para mudanças rápidas de modo.",
-          "configure_floor_heating": "Ativa a configuração da proteção de temperatura do piso. Quando ativado, você pode definir um sensor de piso e limites máximo/mínimo para proteger seu piso."
+          "configure_floor_heating": "Ativa a configuração da proteção de temperatura do piso. Quando ativado, você pode definir um sensor de piso e limites máximo/mínimo para proteger seu piso.",
+          "configure_secondary_heater": "Adiciona um segundo aquecedor que ajuda quando o aquecedor principal não atinge a temperatura alvo a tempo, por exemplo a bomba de calor de um ar-condicionado apoiando uma lareira. Você escolhe a entidade, o tempo limite e se o aquecedor principal continua ligado."
         }
       },
       "heater_cooler": {
@@ -791,14 +793,16 @@
           "configure_humidity": "Configurar controle de umidade",
           "configure_openings": "Configurar sensores de janela/porta",
           "configure_presets": "Configurar predefinições de temperatura",
-          "configure_floor_heating": "Configurar proteção de aquecimento de piso"
+          "configure_floor_heating": "Configurar proteção de aquecimento de piso",
+          "configure_secondary_heater": "Configurar aquecedor secundário (reserva)"
         },
         "data_description": {
           "configure_fan": "Ativa a configuração das definições do ventilador. Isso permite configurar uma entidade de ventilador separada que pode funcionar de forma independente para circulação de ar.",
           "configure_humidity": "Ativa a configuração de monitoramento e controle de umidade. Isso permite configurar sensores de umidade e a operação do modo secagem.",
           "configure_openings": "Ativa a configuração de sensores de janela e porta para que o termostato possa pausar a operação quando aberturas forem detectadas.",
           "configure_presets": "Ativa a configuração de predefinições de temperatura como Ausente, Conforto e Eco para mudanças rápidas de modo.",
-          "configure_floor_heating": "Ativa a configuração da proteção de temperatura do piso. Quando ativado, você pode definir um sensor de piso e limites máximo/mínimo para proteger seu piso."
+          "configure_floor_heating": "Ativa a configuração da proteção de temperatura do piso. Quando ativado, você pode definir um sensor de piso e limites máximo/mínimo para proteger seu piso.",
+          "configure_secondary_heater": "Adiciona um segundo aquecedor que ajuda quando o aquecedor principal não atinge a temperatura alvo a tempo, por exemplo a bomba de calor de um ar-condicionado apoiando uma lareira. Você escolhe a entidade, o tempo limite e se o aquecedor principal continua ligado."
         }
       },
       "basic": {

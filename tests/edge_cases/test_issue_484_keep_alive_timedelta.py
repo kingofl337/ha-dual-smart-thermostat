@@ -13,14 +13,22 @@ Fix: _normalize_config_numeric_values() converts time-based config values
 
 from datetime import timedelta
 
+from freezegun.api import FrozenDateTimeFactory
+from homeassistant.components import input_boolean
+from homeassistant.components.climate import HVACMode
+from homeassistant.const import STATE_OFF, STATE_ON
 from homeassistant.core import HomeAssistant
+from homeassistant.setup import async_setup_component
 import pytest
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
 from custom_components.dual_smart_thermostat.const import (
+    CONF_AUX_HEATER,
+    CONF_AUX_HEATING_TIMEOUT,
     CONF_COLD_TOLERANCE,
     CONF_HEATER,
     CONF_HOT_TOLERANCE,
+    CONF_INITIAL_HVAC_MODE,
     CONF_KEEP_ALIVE,
     CONF_MIN_DUR,
     CONF_SENSOR,
@@ -387,3 +395,54 @@ async def test_options_flow_with_dict_keep_alive(hass: HomeAssistant):
     # and display the initial form
     assert result["type"] == "form"
     assert result["step_id"] == "init"
+
+
+@pytest.mark.asyncio
+async def test_secondary_heater_timeout_duration_dict_to_timedelta(
+    hass: HomeAssistant, freezer: FrozenDateTimeFactory
+):
+    """secondary_heater_timeout from the UI (DurationSelector dict) must work.
+
+    The config flow stores secondary_heater_timeout as
+    {"hours": 0, "minutes": 0, "seconds": 10}. Without normalisation the
+    two-stage logic subtracts a timedelta from that dict and fails as soon as
+    heating starts.
+    """
+    heater = "input_boolean.heater_switch"
+    secondary_heater = "input_boolean.secondary_heater_switch"
+    assert await async_setup_component(
+        hass,
+        input_boolean.DOMAIN,
+        {"input_boolean": {"heater_switch": None, "secondary_heater_switch": None}},
+    )
+    setup_sensor(hass, 18.0)
+
+    config_entry = MockConfigEntry(
+        domain=DOMAIN,
+        data={
+            "name": "test",
+            CONF_HEATER: heater,
+            CONF_SENSOR: common.ENT_SENSOR,
+            CONF_AUX_HEATER: secondary_heater,
+            CONF_AUX_HEATING_TIMEOUT: {"hours": 0, "minutes": 0, "seconds": 10},
+            CONF_COLD_TOLERANCE: 0.5,
+            CONF_HOT_TOLERANCE: 0.5,
+            CONF_INITIAL_HVAC_MODE: HVACMode.HEAT,
+        },
+        title="test",
+    )
+    config_entry.add_to_hass(hass)
+    await hass.config_entries.async_setup(config_entry.entry_id)
+    await hass.async_block_till_done()
+
+    await common.async_set_temperature(hass, 23)
+    await hass.async_block_till_done()
+
+    assert hass.states.get(heater).state == STATE_ON
+    assert hass.states.get(secondary_heater).state == STATE_OFF
+
+    freezer.tick(timedelta(seconds=15))
+    common.async_fire_time_changed(hass)
+    await hass.async_block_till_done()
+
+    assert hass.states.get(secondary_heater).state == STATE_ON
