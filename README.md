@@ -132,6 +132,8 @@ If only the [`heater`](#heater) entity is set the thermostat works only in heate
 Two stage or AUX heating can be enabled by adding the [required configuration](#two-stage-heating-example) entities: [`secondary_heater`](#secondary_heater), [`secondary heater_timeout`](#secondary_heater_timeout). If these are set the feature will enable automatically.
 Optionally you can set [`secondary heater_dual_mode`](#secondar_heater_dual_mode) to `true` to turn on the secondary heater together with the primary heater.
 
+In the UI, two-stage heating is available for the **Dual Stage** system type and, alongside cooling, for **Heater with Cooler**: tick **Configure secondary (backup) heater** in the features step, then choose the secondary heater, its timeout and the dual mode. For example, a pellet stove as the heater with the heat-pump side of an AC unit as the secondary heater. The settings can be changed later in the integration's options.
+
 ### How Two Stage Heating Works?
 
 If the timeout ends and the [`heater`](#heater) was on for the whole time, the thermostat switches to the [`secondary heater`](#secondary_heater). In this case, the primary heater ([`heater`](#heater)) will be turned off. This will be remembered for the day it turned on, and in the next heating cycle, the [`secondary heater`](#secondary_heater) will turn on automatically.

@@ -629,16 +629,26 @@ def get_cooling_schema():
     )
 
 
-def get_dual_stage_schema():
-    """Get dual stage heating configuration schema."""
+def get_dual_stage_schema(include_heater: bool = True):
+    """Get dual stage heating configuration schema.
+
+    Args:
+        include_heater: Ask for the primary heater too. False when the heater was
+            already chosen in an earlier step (heater_cooler with a secondary
+            heater), in which case the secondary heater is required.
+    """
+    schema_dict: dict[Any, Any] = {}
+    if include_heater:
+        schema_dict[vol.Required(CONF_HEATER)] = get_entity_selector(
+            allowed_domains(CONF_HEATER)
+        )
+        aux_key: Any = vol.Optional(CONF_AUX_HEATER)
+    else:
+        aux_key = vol.Required(CONF_AUX_HEATER)
     return vol.Schema(
         {
-            vol.Required(CONF_HEATER): get_entity_selector(
-                allowed_domains(CONF_HEATER)
-            ),
-            vol.Optional(CONF_AUX_HEATER): get_entity_selector(
-                allowed_domains(CONF_AUX_HEATER)
-            ),
+            **schema_dict,
+            aux_key: get_entity_selector(allowed_domains(CONF_AUX_HEATER)),
             vol.Optional(
                 CONF_AUX_HEATING_DUAL_MODE, default=False
             ): get_boolean_selector(),
@@ -770,6 +780,7 @@ def get_features_schema(
         SystemType.SIMPLE_HEATER: ["floor_heating", "openings", "presets"],
         SystemType.HEATER_COOLER: [
             "floor_heating",
+            "secondary_heater",
             "fan",
             "humidity",
             "openings",
@@ -791,6 +802,7 @@ def get_features_schema(
     # Define feature order for consistent UI
     feature_order = [
         "floor_heating",
+        "secondary_heater",
         "fan",
         "humidity",
         "openings",

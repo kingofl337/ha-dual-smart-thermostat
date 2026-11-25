@@ -8,6 +8,7 @@ all valid feature combinations through complete config and options flows.
 
 Available Features for heater_cooler:
 - ✅ floor_heating
+- ✅ secondary_heater (two-stage heating on top of heater + cooler)
 - ✅ fan
 - ✅ humidity
 - ✅ openings
@@ -32,6 +33,9 @@ import pytest
 
 from custom_components.dual_smart_thermostat.config_flow import ConfigFlowHandler
 from custom_components.dual_smart_thermostat.const import (
+    CONF_AUX_HEATER,
+    CONF_AUX_HEATING_DUAL_MODE,
+    CONF_AUX_HEATING_TIMEOUT,
     CONF_COOLER,
     CONF_DRYER,
     CONF_FAN,
@@ -175,6 +179,122 @@ class TestHeaterCoolerFloorHeatingOnly:
         assert flow.collected_config[CONF_FLOOR_SENSOR] == "sensor.floor_temperature"
         assert flow.collected_config[CONF_MIN_FLOOR_TEMP] == 5
         assert flow.collected_config[CONF_MAX_FLOOR_TEMP] == 28
+
+
+class TestHeaterCoolerSecondaryHeater:
+    """heater_cooler with a secondary (aux) heater, e.g. a stove + AC heat pump."""
+
+    async def _start_flow(self, mock_hass):
+        flow = ConfigFlowHandler()
+        flow.hass = mock_hass
+        flow.collected_config = {}
+        await flow.async_step_user({CONF_SYSTEM_TYPE: SYSTEM_TYPE_HEATER_COOLER})
+        result = await flow.async_step_heater_cooler(
+            {
+                CONF_NAME: "Main Area",
+                CONF_SENSOR: "sensor.temperature",
+                CONF_HEATER: "switch.stove",
+                CONF_COOLER: "switch.ac_cool",
+            }
+        )
+        assert result["step_id"] == "features"
+        return flow
+
+    async def test_config_flow_secondary_heater(self, mock_hass):
+        """Enabling the toggle asks for the aux heater and saves it."""
+        flow = await self._start_flow(mock_hass)
+
+        result = await flow.async_step_features(
+            {
+                "configure_floor_heating": False,
+                "configure_secondary_heater": True,
+                "configure_fan": False,
+                "configure_humidity": False,
+                "configure_openings": False,
+                "configure_presets": False,
+            }
+        )
+        assert result["type"] == FlowResultType.FORM
+        assert result["step_id"] == "dual_stage_config"
+
+        # The primary heater was already chosen - only aux settings are asked
+        fields = [k.schema for k in result["data_schema"].schema]
+        assert CONF_HEATER not in fields
+        assert CONF_AUX_HEATER in fields
+
+        result = await flow.async_step_dual_stage_config(
+            {
+                CONF_AUX_HEATER: "switch.ac_heat",
+                CONF_AUX_HEATING_TIMEOUT: {"hours": 0, "minutes": 45, "seconds": 0},
+                CONF_AUX_HEATING_DUAL_MODE: True,
+            }
+        )
+        assert result["type"] == FlowResultType.CREATE_ENTRY
+
+        data = result["data"]
+        assert data[CONF_HEATER] == "switch.stove"
+        assert data[CONF_COOLER] == "switch.ac_cool"
+        assert data[CONF_AUX_HEATER] == "switch.ac_heat"
+        assert data[CONF_AUX_HEATING_TIMEOUT] == {
+            "hours": 0,
+            "minutes": 45,
+            "seconds": 0,
+        }
+        assert data[CONF_AUX_HEATING_DUAL_MODE] is True
+        assert "configure_secondary_heater" not in data
+
+    async def test_secondary_heater_entity_required(self, mock_hass):
+        """With the toggle on, the aux heater entity cannot be left empty."""
+        flow = await self._start_flow(mock_hass)
+        await flow.async_step_features({"configure_secondary_heater": True})
+
+        result = await flow.async_step_dual_stage_config(
+            {CONF_AUX_HEATING_TIMEOUT: {"hours": 0, "minutes": 45, "seconds": 0}}
+        )
+        assert result["type"] == FlowResultType.FORM
+        assert result["step_id"] == "dual_stage_config"
+        assert result["errors"] == {CONF_AUX_HEATER: "aux_heater_entity_required"}
+
+    async def test_unchecking_secondary_heater_clears_config(self, mock_hass):
+        """Unchecking the toggle (e.g. in reconfigure) removes the aux settings."""
+        flow = await self._start_flow(mock_hass)
+        flow.collected_config.update(
+            {
+                CONF_AUX_HEATER: "switch.ac_heat",
+                CONF_AUX_HEATING_TIMEOUT: {"hours": 0, "minutes": 45, "seconds": 0},
+                CONF_AUX_HEATING_DUAL_MODE: True,
+            }
+        )
+
+        result = await flow.async_step_features({"configure_secondary_heater": False})
+
+        assert result["type"] == FlowResultType.CREATE_ENTRY
+        for key in (
+            CONF_AUX_HEATER,
+            CONF_AUX_HEATING_TIMEOUT,
+            CONF_AUX_HEATING_DUAL_MODE,
+        ):
+            assert key not in result["data"]
+
+    async def test_existing_secondary_heater_preselects_toggle(self, mock_hass):
+        """A configured aux heater shows the toggle as checked (reconfigure)."""
+        flow = ConfigFlowHandler()
+        flow.hass = mock_hass
+        flow.collected_config = {
+            CONF_SYSTEM_TYPE: SYSTEM_TYPE_HEATER_COOLER,
+            CONF_HEATER: "switch.stove",
+            CONF_COOLER: "switch.ac_cool",
+            CONF_AUX_HEATER: "switch.ac_heat",
+        }
+
+        result = await flow.async_step_features()
+
+        defaults = {
+            key.schema: key.default()
+            for key in result["data_schema"].schema
+            if hasattr(key, "default") and callable(key.default)
+        }
+        assert defaults["configure_secondary_heater"] is True
 
 
 class TestHeaterCoolerFanOnly:
@@ -656,6 +776,7 @@ class TestHeaterCoolerAvailableFeatures:
         # All features should be present
         expected_features = [
             "configure_floor_heating",
+            "configure_secondary_heater",
             "configure_fan",
             "configure_humidity",
             "configure_openings",

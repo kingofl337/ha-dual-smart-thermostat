@@ -186,14 +186,16 @@
           "configure_humidity": "Configurar controlo de humidade",
           "configure_openings": "Configurar sensores de janelas/portas",
           "configure_presets": "Configurar predefinições de temperatura",
-          "configure_floor_heating": "Configurar proteção do aquecimento de piso"
+          "configure_floor_heating": "Configurar proteção do aquecimento de piso",
+          "configure_secondary_heater": "Configurar aquecedor secundário (reserva)"
         },
         "data_description": {
           "configure_fan": "Ative a configuração das definições da ventoinha. Isto permite-lhe configurar uma entidade de ventoinha separada que pode funcionar de forma independente para circulação de ar.",
           "configure_humidity": "Ative a configuração da monitorização e controlo de humidade. Isto permite-lhe configurar sensores de humidade e o funcionamento do modo de desumidificação.",
           "configure_openings": "Ative a configuração de sensores de janelas e portas para que o termóstato possa pausar o funcionamento quando forem detetadas aberturas.",
           "configure_presets": "Ative a configuração de predefinições de temperatura como Ausente, Conforto e Eco para mudanças rápidas de modo.",
-          "configure_floor_heating": "Ative a configuração da proteção da temperatura do piso. Quando ativada, pode definir um sensor de piso e limites máximo/mínimo para proteger o seu pavimento."
+          "configure_floor_heating": "Ative a configuração da proteção da temperatura do piso. Quando ativada, pode definir um sensor de piso e limites máximo/mínimo para proteger o seu pavimento.",
+          "configure_secondary_heater": "Adiciona um segundo aquecedor que ajuda quando o aquecedor principal não atinge a temperatura alvo a tempo, por exemplo a bomba de calor de um ar condicionado a apoiar uma salamandra. Escolhe a entidade, o tempo limite e se o aquecedor principal se mantém ligado."
         }
       },
       "heater_cooler": {
@@ -791,14 +793,16 @@
           "configure_humidity": "Configurar controlo de humidade",
           "configure_openings": "Configurar sensores de janelas/portas",
           "configure_presets": "Configurar predefinições de temperatura",
-          "configure_floor_heating": "Configurar proteção do aquecimento de piso"
+          "configure_floor_heating": "Configurar proteção do aquecimento de piso",
+          "configure_secondary_heater": "Configurar aquecedor secundário (reserva)"
         },
         "data_description": {
           "configure_fan": "Ative a configuração das definições da ventoinha. Isto permite-lhe configurar uma entidade de ventoinha separada que pode funcionar de forma independente para circulação de ar.",
           "configure_humidity": "Ative a configuração da monitorização e controlo de humidade. Isto permite-lhe configurar sensores de humidade e o funcionamento do modo de desumidificação.",
           "configure_openings": "Ative a configuração de sensores de janelas e portas para que o termóstato possa pausar o funcionamento quando forem detetadas aberturas.",
           "configure_presets": "Ative a configuração de predefinições de temperatura como Ausente, Conforto e Eco para mudanças rápidas de modo.",
-          "configure_floor_heating": "Ative a configuração da proteção da temperatura do piso. Quando ativada, pode definir um sensor de piso e limites máximo/mínimo para proteger o seu pavimento."
+          "configure_floor_heating": "Ative a configuração da proteção da temperatura do piso. Quando ativada, pode definir um sensor de piso e limites máximo/mínimo para proteger o seu pavimento.",
+          "configure_secondary_heater": "Adiciona um segundo aquecedor que ajuda quando o aquecedor principal não atinge a temperatura alvo a tempo, por exemplo a bomba de calor de um ar condicionado a apoiar uma salamandra. Escolhe a entidade, o tempo limite e se o aquecedor principal se mantém ligado."
         }
       },
       "basic": {

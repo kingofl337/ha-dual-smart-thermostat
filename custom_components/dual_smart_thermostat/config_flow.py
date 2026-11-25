@@ -16,6 +16,7 @@ from .config_validation import validate_config_with_models
 from .const import (
     CONF_AC_MODE,
     CONF_AUX_HEATER,
+    CONF_AUX_HEATING_DUAL_MODE,
     CONF_AUX_HEATING_TIMEOUT,
     CONF_COOLER,
     CONF_FAN,
@@ -107,6 +108,7 @@ class ConfigFlowHandler(ExcludeOwnEntity, ConfigFlow, domain=DOMAIN):
             "configure_fan",
             "configure_humidity",
             "configure_floor_heating",
+            "configure_secondary_heater",
             "system_type_changed",
         }
         cleaned = {k: v for k, v in config.items() if k not in excluded_flags}
@@ -514,12 +516,21 @@ class ConfigFlowHandler(ExcludeOwnEntity, ConfigFlow, domain=DOMAIN):
         """Handle dual stage specific configuration."""
         errors = {}
 
+        # heater_cooler reaches this step from the "secondary heater" feature
+        # toggle: the primary heater is already chosen and the secondary heater
+        # is required (otherwise the step would be shown again and again).
+        is_add_on = self.collected_config.get(
+            CONF_SYSTEM_TYPE
+        ) == SystemType.HEATER_COOLER and bool(self.collected_config.get(CONF_HEATER))
+
         if user_input is not None:
             # Validate that aux heater and timeout are provided for dual stage
             aux_heater = user_input.get(CONF_AUX_HEATER)
             aux_timeout = user_input.get(CONF_AUX_HEATING_TIMEOUT)
 
-            if aux_heater and not aux_timeout:
+            if is_add_on and not aux_heater:
+                errors[CONF_AUX_HEATER] = "aux_heater_entity_required"
+            elif aux_heater and not aux_timeout:
                 errors[CONF_AUX_HEATING_TIMEOUT] = "aux_heater_timeout_required"
             elif aux_timeout and not aux_heater:
                 errors[CONF_AUX_HEATER] = "aux_heater_entity_required"
@@ -529,7 +540,7 @@ class ConfigFlowHandler(ExcludeOwnEntity, ConfigFlow, domain=DOMAIN):
 
         return self.async_show_form(
             step_id="dual_stage_config",
-            data_schema=get_dual_stage_schema(),
+            data_schema=get_dual_stage_schema(include_heater=not is_add_on),
             errors=errors,
         )
 
@@ -760,6 +771,15 @@ class ConfigFlowHandler(ExcludeOwnEntity, ConfigFlow, domain=DOMAIN):
 
         # Floor heating configuration is handled earlier where required.
 
+        # heater_cooler with a secondary (aux) heater, e.g. a stove backed up by
+        # the heat-pump side of an AC unit
+        if (
+            system_type == SystemType.HEATER_COOLER
+            and self.collected_config.get("configure_secondary_heater")
+            and CONF_AUX_HEATER not in self.collected_config
+        ):
+            return await self.async_step_dual_stage_config()
+
         # For AC-only systems, show fan configuration if enabled
         if (
             system_type == "ac_only"
@@ -884,6 +904,10 @@ class ConfigFlowHandler(ExcludeOwnEntity, ConfigFlow, domain=DOMAIN):
         if CONF_FLOOR_SENSOR in self.collected_config:
             feature_defaults["configure_floor_heating"] = True
 
+        # Secondary heater: detected by presence of the aux heater entity
+        if self.collected_config.get(CONF_AUX_HEATER):
+            feature_defaults["configure_secondary_heater"] = True
+
         # Fan: detected by presence of fan entity
         if CONF_FAN in self.collected_config:
             feature_defaults["configure_fan"] = True
@@ -921,6 +945,21 @@ class ConfigFlowHandler(ExcludeOwnEntity, ConfigFlow, domain=DOMAIN):
             for key in (CONF_FLOOR_SENSOR, *FLOOR_SETTING_KEYS):
                 self.collected_config.pop(key, None)
             _LOGGER.debug("Floor heating unchecked - clearing floor sensor config")
+
+        # Secondary heater unchecked - clear aux heater settings. Only where the
+        # toggle is offered (heater_cooler); dual_stage keeps its aux heater.
+        if self.collected_config.get(
+            CONF_SYSTEM_TYPE
+        ) == SystemType.HEATER_COOLER and not user_input.get(
+            "configure_secondary_heater", False
+        ):
+            for key in (
+                CONF_AUX_HEATER,
+                CONF_AUX_HEATING_TIMEOUT,
+                CONF_AUX_HEATING_DUAL_MODE,
+            ):
+                self.collected_config.pop(key, None)
+            _LOGGER.debug("Secondary heater unchecked - clearing aux heater config")
 
         # Fan unchecked - clear fan entity and related settings
         if not user_input.get("configure_fan", False):

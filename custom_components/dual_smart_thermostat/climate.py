@@ -398,7 +398,12 @@ def _normalize_config_numeric_values(config: dict[str, Any]) -> dict[str, Any]:
     # Time-based keys that need conversion from seconds to timedelta
     # Config flow stores these as int/float (seconds) but code expects timedelta
     # After storage, Home Assistant may deserialize timedelta as dict with days/seconds/microseconds
-    time_keys = [CONF_KEEP_ALIVE, CONF_MIN_DUR, CONF_STALE_DURATION]
+    time_keys = [
+        CONF_KEEP_ALIVE,
+        CONF_MIN_DUR,
+        CONF_STALE_DURATION,
+        CONF_AUX_HEATING_TIMEOUT,
+    ]
 
     for key in time_keys:
         if key in config and config[key] is not None:

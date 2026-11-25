@@ -147,14 +147,16 @@
                     "configure_humidity": "Configure humidity control",
                     "configure_openings": "Configure window/door sensors",
                     "configure_presets": "Configure temperature presets",
-                    "configure_floor_heating": "Configure floor heating protection"
+                    "configure_floor_heating": "Configure floor heating protection",
+                    "configure_secondary_heater": "Configure secondary (backup) heater"
                 },
                 "data_description": {
                     "configure_fan": "Enable configuration of fan settings. This allows you to set up a separate fan entity that can run independently for air circulation.",
                     "configure_humidity": "Enable configuration of humidity monitoring and control. This allows you to set up humidity sensors and dry mode operation.",
                     "configure_openings": "Enable configuration of window and door sensors so the thermostat can pause operation when openings are detected.",
                     "configure_presets": "Enable configuration of temperature presets like Away, Comfort, and Eco for quick mode changes.",
-                    "configure_floor_heating": "Enable configuration of floor temperature protection. When enabled you can set a floor sensor and max/min limits to protect your flooring."
+                    "configure_floor_heating": "Enable configuration of floor temperature protection. When enabled you can set a floor sensor and max/min limits to protect your flooring.",
+                    "configure_secondary_heater": "Add a second heater that helps when the primary heater cannot reach the target in time, for example the heat-pump side of an AC unit backing up a stove. You choose the entity, the timeout and whether the primary stays on."
                 }
             },
             "heater_cooler": {
@@ -752,14 +754,16 @@
                     "configure_humidity": "Configure humidity control",
                     "configure_openings": "Configure window/door sensors",
                     "configure_presets": "Configure temperature presets",
-                    "configure_floor_heating": "Configure floor heating protection"
+                    "configure_floor_heating": "Configure floor heating protection",
+                    "configure_secondary_heater": "Configure secondary (backup) heater"
                 },
                 "data_description": {
                     "configure_fan": "Enable configuration of fan settings. This allows you to set up a separate fan entity that can run independently for air circulation.",
                     "configure_humidity": "Enable configuration of humidity monitoring and control. This allows you to set up humidity sensors and dry mode operation.",
                     "configure_openings": "Enable configuration of window and door sensors so the thermostat can pause operation when openings are detected.",
                     "configure_presets": "Enable configuration of temperature presets like Away, Comfort, and Eco for quick mode changes.",
-                    "configure_floor_heating": "Enable configuration of floor temperature protection. When enabled you can set a floor sensor and max/min limits to protect your flooring."
+                    "configure_floor_heating": "Enable configuration of floor temperature protection. When enabled you can set a floor sensor and max/min limits to protect your flooring.",
+                    "configure_secondary_heater": "Add a second heater that helps when the primary heater cannot reach the target in time, for example the heat-pump side of an AC unit backing up a stove. You choose the entity, the timeout and whether the primary stays on."
                 }
             },
             "basic": {

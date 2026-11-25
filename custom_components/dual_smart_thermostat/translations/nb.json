@@ -186,14 +186,16 @@
           "configure_humidity": "Konfigurer fuktighetskontroll",
           "configure_openings": "Konfigurer vindus-/dørsensorer",
           "configure_presets": "Konfigurer temperaturforhåndsinnstillinger",
-          "configure_floor_heating": "Konfigurer beskyttelse for gulvvarme"
+          "configure_floor_heating": "Konfigurer beskyttelse for gulvvarme",
+          "configure_secondary_heater": "Konfigurer sekundær varmekilde (reserve)"
         },
         "data_description": {
           "configure_fan": "Aktiver konfigurasjon av vifteinnstillinger. Dette lar deg sette opp en egen vifteenhet som kan kjøre uavhengig for luftsirkulasjon.",
           "configure_humidity": "Aktiver konfigurasjon av fuktighetsovervåking og -kontroll. Dette lar deg sette opp fuktighetssensorer og tørkemodus.",
           "configure_openings": "Aktiver konfigurasjon av vindus- og dørsensorer slik at termostaten kan pause driften når åpninger oppdages.",
           "configure_presets": "Aktiver konfigurasjon av temperaturforhåndsinnstillinger som Borte, Komfort og Øko for raske modusendringer.",
-          "configure_floor_heating": "Aktiver konfigurasjon av gulvtemperaturbeskyttelse. Når aktivert kan du angi en gulvsensor og maks/min-grenser for å beskytte gulvet ditt."
+          "configure_floor_heating": "Aktiver konfigurasjon av gulvtemperaturbeskyttelse. Når aktivert kan du angi en gulvsensor og maks/min-grenser for å beskytte gulvet ditt.",
+          "configure_secondary_heater": "Legg til en ekstra varmekilde som hjelper til når primærvarmen ikke når måltemperaturen i tide, for eksempel varmepumpedelen av et klimaanlegg som støtte for en ovn. Du velger enheten, tidsavbruddet og om primærvarmen skal forbli på."
         }
       },
       "heater_cooler": {
@@ -791,14 +793,16 @@
           "configure_humidity": "Konfigurer fuktighetskontroll",
           "configure_openings": "Konfigurer vindus-/dørsensorer",
           "configure_presets": "Konfigurer temperaturforhåndsinnstillinger",
-          "configure_floor_heating": "Konfigurer beskyttelse for gulvvarme"
+          "configure_floor_heating": "Konfigurer beskyttelse for gulvvarme",
+          "configure_secondary_heater": "Konfigurer sekundær varmekilde (reserve)"
         },
         "data_description": {
           "configure_fan": "Aktiver konfigurasjon av vifteinnstillinger. Dette lar deg sette opp en egen vifteenhet som kan kjøre uavhengig for luftsirkulasjon.",
           "configure_humidity": "Aktiver konfigurasjon av fuktighetsovervåking og -kontroll. Dette lar deg sette opp fuktighetssensorer og tørkemodus.",
           "configure_openings": "Aktiver konfigurasjon av vindus- og dørsensorer slik at termostaten kan pause driften når åpninger oppdages.",
           "configure_presets": "Aktiver konfigurasjon av temperaturforhåndsinnstillinger som Borte, Komfort og Øko for raske modusendringer.",
-          "configure_floor_heating": "Aktiver konfigurasjon av gulvtemperaturbeskyttelse. Når aktivert kan du angi en gulvsensor og maks/min-grenser for å beskytte gulvet ditt."
+          "configure_floor_heating": "Aktiver konfigurasjon av gulvtemperaturbeskyttelse. Når aktivert kan du angi en gulvsensor og maks/min-grenser for å beskytte gulvet ditt.",
+          "configure_secondary_heater": "Legg til en ekstra varmekilde som hjelper til når primærvarmen ikke når måltemperaturen i tide, for eksempel varmepumpedelen av et klimaanlegg som støtte for en ovn. Du velger enheten, tidsavbruddet og om primærvarmen skal forbli på."
         }
       },
       "basic": {

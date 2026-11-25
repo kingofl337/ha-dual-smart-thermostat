@@ -186,14 +186,16 @@
           "configure_humidity": "Páratartalom-szabályozás konfigurálása",
           "configure_openings": "Ablak-/ajtóérzékelők konfigurálása",
           "configure_presets": "Hőmérséklet-előbeállítások konfigurálása",
-          "configure_floor_heating": "Padlófűtés-védelem konfigurálása"
+          "configure_floor_heating": "Padlófűtés-védelem konfigurálása",
+          "configure_secondary_heater": "Másodlagos (tartalék) fűtés beállítása"
         },
         "data_description": {
           "configure_fan": "Engedélyezi a ventilátorbeállítások konfigurálását. Lehetővé teszi egy különálló ventilátor entitás beállítását, amely önállóan működhet a levegő keringetéséhez.",
           "configure_humidity": "Engedélyezi a páratartalom figyelésének és szabályozásának konfigurálását. Lehetővé teszi páratartalom-érzékelők és a párátlanító üzemmód beállítását.",
           "configure_openings": "Engedélyezi az ablak- és ajtóérzékelők konfigurálását, hogy a termosztát szüneteltethesse a működést nyílászárók észlelésekor.",
           "configure_presets": "Engedélyezi a hőmérséklet-előbeállítások (például Távol, Komfort és Eco) konfigurálását a gyors üzemmódváltáshoz.",
-          "configure_floor_heating": "Engedélyezi a padlóhőmérséklet-védelem konfigurálását. Bekapcsolva beállíthatsz egy padlóérzékelőt, valamint maximális/minimális határértékeket a padló védelméhez."
+          "configure_floor_heating": "Engedélyezi a padlóhőmérséklet-védelem konfigurálását. Bekapcsolva beállíthatsz egy padlóérzékelőt, valamint maximális/minimális határértékeket a padló védelméhez.",
+          "configure_secondary_heater": "Egy második fűtés hozzáadása, amely besegít, ha az elsődleges fűtés nem éri el időben a célhőmérsékletet, például egy klíma hőszivattyús fűtése egy kályha mellett. Megadhatja az entitást, az időkorlátot, és hogy az elsődleges fűtés bekapcsolva maradjon-e."
         }
       },
       "heater_cooler": {
@@ -791,14 +793,16 @@
           "configure_humidity": "Páratartalom-szabályozás konfigurálása",
           "configure_openings": "Ablak-/ajtóérzékelők konfigurálása",
           "configure_presets": "Hőmérséklet-előbeállítások konfigurálása",
-          "configure_floor_heating": "Padlófűtés-védelem konfigurálása"
+          "configure_floor_heating": "Padlófűtés-védelem konfigurálása",
+          "configure_secondary_heater": "Másodlagos (tartalék) fűtés beállítása"
         },
         "data_description": {
           "configure_fan": "Engedélyezi a ventilátorbeállítások konfigurálását. Lehetővé teszi egy különálló ventilátor entitás beállítását, amely önállóan működhet a levegő keringetéséhez.",
           "configure_humidity": "Engedélyezi a páratartalom figyelésének és szabályozásának konfigurálását. Lehetővé teszi páratartalom-érzékelők és a párátlanító üzemmód beállítását.",
           "configure_openings": "Engedélyezi az ablak- és ajtóérzékelők konfigurálását, hogy a termosztát szüneteltethesse a működést nyílászárók észlelésekor.",
           "configure_presets": "Engedélyezi a hőmérséklet-előbeállítások (például Távol, Komfort és Eco) konfigurálását a gyors üzemmódváltáshoz.",
-          "configure_floor_heating": "Engedélyezi a padlóhőmérséklet-védelem konfigurálását. Bekapcsolva beállíthatsz egy padlóérzékelőt, valamint maximális/minimális határértékeket a padló védelméhez."
+          "configure_floor_heating": "Engedélyezi a padlóhőmérséklet-védelem konfigurálását. Bekapcsolva beállíthatsz egy padlóérzékelőt, valamint maximális/minimális határértékeket a padló védelméhez.",
+          "configure_secondary_heater": "Egy második fűtés hozzáadása, amely besegít, ha az elsődleges fűtés nem éri el időben a célhőmérsékletet, például egy klíma hőszivattyús fűtése egy kályha mellett. Megadhatja az entitást, az időkorlátot, és hogy az elsődleges fűtés bekapcsolva maradjon-e."
         }
       },
       "basic": {
